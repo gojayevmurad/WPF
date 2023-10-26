@@ -1,0 +1,112 @@
+﻿<Window x:Class="TxtFileEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TxtFileEditor"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Margin="10 0" VerticalAlignment="Center">
+            <Border Margin="0 0 10 0" BorderBrush="Gray" BorderThickness="2">
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="directionLbl"
+                           Content="C:\windows..."
+                           Background="LightGray"
+                           Width="140"
+                           />
+                    <Button x:Name="changeDirectionBtn"
+                            Content="•••"
+                            BorderThickness="0"
+                            Padding="10px 0"
+                            Background="DarkGray"
+                            />
+                </StackPanel>
+            </Border>
+            <Border Margin="0 0 10 0" BorderBrush="Gray" BorderThickness="2">
+                <StackPanel Orientation="Horizontal">
+                    <Button 
+                        Padding="10 0"
+                        Margin="0 0 10 0"
+                        BorderThickness="0"
+                        Content="Save"
+                    >
+                    </Button>
+                    <Border x:Name="autoSaveBg" Background="Red" CornerRadius="13">
+                        <ToggleButton  BorderThickness="0"
+                                       x:Name="autoSaveBtn"
+                                       Background="Transparent"
+                                       Checked="autoSaveBtn_Checked"
+                                       Unchecked="autoSaveBtn_Unchecked"
+                                       Width="50" >
+                            <Canvas x:Name="mainCanvs" Height="20" Width="50" Background="Transparent">
+                                <Ellipse x:Name="autoSaveEllipse" Fill="White" Width="20" Height="20" Canvas.Right="2" Canvas.Left="0" Canvas.Top="0" />
+                            </Canvas>
+                            <ToggleButton.Style>
+                                <Style TargetType="{x:Type ToggleButton}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ToggleButton">
+                                                <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                                    Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center"                  
+                                                        VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter Property="Background" Value="Red" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ToggleButton.Style>
+                        </ToggleButton>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <Border BorderBrush="Gray" BorderThickness="2">
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="cutBtn"
+                            Padding="10 0"
+                            Margin="0 0 10 0"
+                            BorderThickness="0"
+                            Content="Cut"/>
+                    
+                    <Button x:Name="copyBtn"
+                            Padding="10 0"
+                            Margin="0 0 10 0"
+                            BorderThickness="0"
+                            Content="Copy"/>
+
+                    <Button x:Name="pasteBtn"
+                            Padding="10 0"
+                            Margin="0 0 10 0"
+                            BorderThickness="0"
+                            Content="Paste"/>
+
+                    <Button x:Name="selectAllBtn"
+                            Padding="10 0"
+                            BorderThickness="0"
+                            Content="Select All"/>
+                </StackPanel>
+            </Border>
+
+        </WrapPanel>
+        <TextBox Grid.Row="1"
+                 TextWrapping="Wrap"
+                 Margin="3"
+                 MaxLength="500"
+                 AcceptsReturn="True"
+                 AcceptsTab="True"
+                 VerticalScrollBarVisibility="Visible"
+                 />
+    </Grid>
+</Window>
