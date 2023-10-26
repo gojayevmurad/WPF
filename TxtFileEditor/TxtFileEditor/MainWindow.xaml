@@ -18,23 +18,25 @@
                     <Label Name="directionLbl"
                            Content="C:\windows..."
                            Background="LightGray"
-                           Width="140"
+                           Width="320"
                            />
                     <Button x:Name="changeDirectionBtn"
                             Content="•••"
                             BorderThickness="0"
                             Padding="10px 0"
-                            Background="DarkGray"
+                            Background="DarkGray" Click="changeDirectionBtn_Click"
                             />
                 </StackPanel>
             </Border>
             <Border Margin="0 0 10 0" BorderBrush="Gray" BorderThickness="2">
                 <StackPanel Orientation="Horizontal">
                     <Button 
+                        Name="saveBtn"
                         Padding="10 0"
                         Margin="0 0 10 0"
                         BorderThickness="0"
-                        Content="Save"
+                        Content="Save" 
+                        Click="saveBtn_Click"
                     >
                     </Button>
                     <Border x:Name="autoSaveBg" Background="Red" CornerRadius="13">
@@ -78,35 +80,38 @@
                             Padding="10 0"
                             Margin="0 0 10 0"
                             BorderThickness="0"
-                            Content="Cut"/>
+                            Content="Cut" Click="cutBtn_Click"/>
                     
                     <Button x:Name="copyBtn"
                             Padding="10 0"
                             Margin="0 0 10 0"
                             BorderThickness="0"
-                            Content="Copy"/>
+                            Content="Copy" Click="copyBtn_Click"/>
 
                     <Button x:Name="pasteBtn"
                             Padding="10 0"
                             Margin="0 0 10 0"
                             BorderThickness="0"
-                            Content="Paste"/>
+                            Content="Paste" Click="pasteBtn_Click"/>
 
                     <Button x:Name="selectAllBtn"
                             Padding="10 0"
                             BorderThickness="0"
-                            Content="Select All"/>
+                            Content="Select All" Click="selectAllBtn_Click"/>
                 </StackPanel>
             </Border>
 
         </WrapPanel>
-        <TextBox Grid.Row="1"
+        <TextBox Name="textArea"
+                 Grid.Row="1"
+                 IsEnabled="False"
                  TextWrapping="Wrap"
                  Margin="3"
                  MaxLength="500"
                  AcceptsReturn="True"
                  AcceptsTab="True"
                  VerticalScrollBarVisibility="Visible"
-                 />
+                 TextChanged="textArea_TextChanged"
+                />
     </Grid>
 </Window>
