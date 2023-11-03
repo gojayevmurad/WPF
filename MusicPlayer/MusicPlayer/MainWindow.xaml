@@ -1,0 +1,80 @@
+﻿<Window x:Class="MusicPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:MusicPlayer"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        MaxWidth="300"
+        MaxHeight="500"
+        Height="500" Width="300">
+    <Grid>
+        <Border Name="mainBorder" Padding="10 15 10 10" MouseDown="mainBorder_MouseDown" BorderThickness="0" CornerRadius="9" Background="#4A0404">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Header--> 
+                 <Button Grid.Row="0" Name="browseBtn" 
+                         Click="browseBtn_Click"
+                         Style="{StaticResource topBtn}"
+                         HorizontalAlignment="Left">
+                     <Icon:PackIconMaterial Kind="Folder"/>
+                 </Button>
+                 <Button Grid.Row="0" Name="closeBtn" Click="closeBtn_Click" 
+                         Style="{StaticResource topBtn}"
+                          HorizontalAlignment="Right">
+                     <Icon:PackIconMaterial Kind="Close"/>
+                 </Button>
+
+                <!--Content-->
+
+                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 20 0 0">
+                    <Icon:PackIconMaterial Template="{StaticResource mainIcon}" 
+                                           Foreground="White" Background="#880808" 
+                                           Kind="MusicNoteQuarter" Height="240" Width="240" 
+                                           HorizontalAlignment="Center"/>
+                    
+                    <Label Name="songNameLbl" Content="Song Name" FontFamily="Candara" Foreground="White"/>
+
+                    <Label Content="C# WPF Mp3 Music Player" FontFamily="Candara" Foreground="White"/>
+                    
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center">
+                    <Grid>
+                        <Label Foreground="White" FontSize="12" 
+                               Name="currentTimeLbl" Content="0:00" />
+                        <Label Foreground="White" FontSize="12" 
+                               Name="totalTimeLbl" Content="1:20" 
+                               HorizontalAlignment="Right"/>
+                    </Grid>
+                    <Slider Style="{DynamicResource SliderStyle1}" Value="50" Maximum="100" />
+                    <Grid Margin="0 20 0 0">
+                        <Button Width="40" HorizontalAlignment="Center" 
+                                Margin="-110 0 0 0" Style="{StaticResource controlButton}">
+                            <Icon:PackIconMaterial Kind="SkipPrevious" Style="{StaticResource controlButtonIcons}"/>
+                        </Button>
+                        <Button  Width="40" HorizontalAlignment="Center" 
+                                 Style="{StaticResource controlButton}" Click="pausePlayBtn_Click">
+                            <Icon:PackIconMaterial Name="playPauseIcon" Kind="Play" Style="{DynamicResource controlButtonIcons}" Margin="4 0 0 0"/>
+                        </Button>
+                        <Button Width="40" HorizontalAlignment="Center"  
+                                Margin="110 0 0 0" Style="{StaticResource controlButton}">
+                            <Icon:PackIconMaterial Kind="SkipForward" Style="{StaticResource controlButtonIcons}"/>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+                
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
