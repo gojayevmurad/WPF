@@ -19,7 +19,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2.5*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!--Header--> 
@@ -43,28 +43,28 @@
                                            Kind="MusicNoteQuarter" Height="240" Width="240" 
                                            HorizontalAlignment="Center"/>
                     
-                    <Label Name="songNameLbl" Content="Song Name" FontFamily="Candara" Foreground="White"/>
+                    <Label Name="songNameLbl" Content="Song Name" FontWeight="ExtraBlack" FontFamily="Candara" Foreground="White" Margin="0 10 0 0"/>
 
-                    <Label Content="C# WPF Mp3 Music Player" FontFamily="Candara" Foreground="White"/>
+                    <Label Content="C# WPF Mp3 Music Player" Opacity=".7" FontSize="10" FontFamily="Candara" Foreground="White" Margin="0 -10 0 0"/>
                     
                 </StackPanel>
 
                 <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center">
                     <Grid>
                         <Label Foreground="White" FontSize="12" 
-                               Name="currentTimeLbl" Content="0:00" />
+                               Name="currentTimeLbl" Content="-:--" />
                         <Label Foreground="White" FontSize="12" 
-                               Name="totalTimeLbl" Content="1:20" 
+                               Name="totalTimeLbl" Content="-:--" 
                                HorizontalAlignment="Right"/>
                     </Grid>
-                    <Slider Style="{DynamicResource SliderStyle1}" Value="50" Maximum="100" />
+                    <Slider x:Name="soundSlider" Style="{DynamicResource SliderStyle1}" Value="0" Maximum="100" />
                     <Grid Margin="0 20 0 0">
                         <Button Width="40" HorizontalAlignment="Center" 
                                 Margin="-110 0 0 0" Style="{StaticResource controlButton}">
                             <Icon:PackIconMaterial Kind="SkipPrevious" Style="{StaticResource controlButtonIcons}"/>
                         </Button>
-                        <Button  Width="40" HorizontalAlignment="Center" 
-                                 Style="{StaticResource controlButton}" Click="pausePlayBtn_Click">
+                        <Button Click="pausePlayBtn_Click" Width="40" HorizontalAlignment="Center" 
+                                 Style="{StaticResource controlButton}" >
                             <Icon:PackIconMaterial Name="playPauseIcon" Kind="Play" Style="{DynamicResource controlButtonIcons}" Margin="4 0 0 0"/>
                         </Button>
                         <Button Width="40" HorizontalAlignment="Center"  

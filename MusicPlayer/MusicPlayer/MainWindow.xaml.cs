@@ -28,17 +28,39 @@ namespace MusicPlayer
         DispatcherTimer timer = new DispatcherTimer();
         OpenFileDialog openFileDialog = new OpenFileDialog();
 
-        public double progress { get; set; }
-
-
+        public double duration { get; set; } = 0;
 
         public MainWindow()
         {
             InitializeComponent();
+
             this.DataContext = this;
+
             timer.Interval = TimeSpan.FromSeconds(.5);
-            timer.Tick += Timer_Tick;
+            timer.Tick += UpdateUIPerSecond;
+
             openFileDialog.Filter = "MP3 Files (*.mp3)|*.mp3";
+            
+            mediaPlayer.MediaOpened += setMediaData;
+            mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
+
+        }
+
+        private void MediaPlayer_MediaEnded(object? sender, EventArgs e)
+        {
+            mediaPlayer.Close();
+            songNameLbl.Content = "Song Name";
+        }
+
+        private void UpdateUIPerSecond(object? sender, EventArgs e)
+        {
+            TimeSpan currentPosition = mediaPlayer.Position;
+            currentTimeLbl.Content = string.Format("{0}:{1:D2}", (int)currentPosition.TotalMinutes, currentPosition.Seconds);
+
+            if (duration != 0)
+            {
+                soundSlider.Value = (int)currentPosition.TotalSeconds / duration * 100;
+            }
         }
 
         private void mainBorder_MouseDown(object sender, MouseButtonEventArgs e)
@@ -62,23 +84,12 @@ namespace MusicPlayer
             timer.Start();
         }
 
-        private void Timer_Tick(object? sender, EventArgs e)
-        {
-            TimeSpan currentPosition = mediaPlayer.Position;
-            currentTimeLbl.Content = string.Format("{0}:{1:D2}", (int)currentPosition.TotalMinutes, currentPosition.Seconds);
-        }
-
         private void pauseMusicHandler()
         {
             playPauseIcon.Kind = PackIconMaterialKind.Play;
             playPauseIcon.Margin = new Thickness(4, 0, 0, 0);
             mediaPlayer.Pause();
             timer.Stop();
-        }
-
-        private void setMediaData()
-        {
-            songNameLbl.Content = openFileDialog.SafeFileName;
         }
 
         private void browseBtn_Click(object sender, RoutedEventArgs e)
@@ -88,8 +99,18 @@ namespace MusicPlayer
             {
                 mediaPlayer.Open(new Uri(openFileDialog.FileName));
                 playMusicHandler();
-                setMediaData();
             }
         }
+
+        private void setMediaData(object? sender, EventArgs e)
+        {
+            songNameLbl.Content = openFileDialog.SafeFileName;
+            TimeSpan totalDuration = mediaPlayer.NaturalDuration.TimeSpan;
+            duration = (int)totalDuration.TotalSeconds;
+
+            string formattedDuration = string.Format("{0:D2}:{1:D2}:{2:D2}", totalDuration.Hours, totalDuration.Minutes, totalDuration.Seconds);
+            totalTimeLbl.Content = formattedDuration;
+        }
+
     }
 }
